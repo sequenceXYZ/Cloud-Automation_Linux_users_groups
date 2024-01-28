@@ -1,0 +1,104 @@
+# Task:
+# Create shared directory
+# create two users, 
+# set permissions for users to access shared directory, 
+# set full permissions to own documents, 
+# read permissions to other documents 
+
+# as root user in EC2 Amazon Linux
+sudo su -
+
+# create group
+groupadd developers
+
+# create users with home
+useradd anna --create-home
+useradd maija --create-home
+ls -l /home
+
+# check if users are created
+cat /etc/passwd 
+tail -3 /etc/passwd
+
+# add users into additional group
+usermod anna -aG developers
+usermod maija -aG developers
+
+# create password for users
+passwd anna
+paswd maija
+
+# check if passwords created
+cat /etc/shadow
+
+# check id users are added into groups
+groups maija
+groups anna
+tail -3 /etc/group
+
+# see user id
+id maija
+id anna
+
+# create shared directory
+mkdir shared-directory
+ls -ld /home/shared-directory
+
+# change group to developers for shared directory 
+chown :developers /home/shared-directory
+ls -ld /home/shared-folder
+
+# change permisions on shared directory 
+chmod 775 /home/shared-direcory
+ls -ld /home/shared-directory
+exit
+
+# log in as user anna
+su - anna
+
+# create file in shared directory
+touch /home/shared-directory/anna-file.txt
+
+# change file ownership to group developers
+chown :developers /home/shared-directory/anna-file.txt
+
+# change group permisions to read only for the file: 
+chmod 722 /home/shared-directory/anna-file.txt
+ls -l /home/shared-directory/anna-file.txt
+exit
+
+# log in as user maija
+su - maija
+
+# see shared directory
+ls -ld /home/shared-directory
+
+# create file, change group to developers and change group permissions to read only
+touch /home/shared-directory/maija-file.txt
+ls -l /home/shared-directory/maija-file.txt
+chown :developers /home/shared-folder/maija-file.txt
+chmod 722 /home/shared-folder/maija-file.txt
+
+# write in anna's file
+echo "hello from maija" >> /home/shared-folder/anna-file.txt
+exit
+
+# check what is written in anna's file
+su - anna
+cat /home/shared-folder/anna-file.txt
+exit
+
+
+# some userful commands:
+# ingerit the group ownership:
+chmod g+s /home/shared-directory
+
+# add users in sudoers group:
+usermod -aG wheel anna
+
+# run visudo as root and locate the wheel group
+# if it is not defined in the file, add
+%wheel ALL=(ALL:ALL) ALL
+
+
+
