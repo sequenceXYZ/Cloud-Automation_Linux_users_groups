@@ -444,7 +444,6 @@ apt purge <packageName>
 
 
 
-
 --------------------------------------
 Directory Commands
 --------------------------------------
@@ -482,7 +481,6 @@ ls -a
 ls -al 
 lists folder
 ls -ld <dirName>
-
 
 
 
