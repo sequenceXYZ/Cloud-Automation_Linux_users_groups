@@ -1,0 +1,43 @@
+----------------------
+### Hard Links ###
+----------------------
+# hard links can only be created for regular files and not for directories or special files. 
+# additionally, hard links cannot span across different file systems.
+
+# Command to create hard link
+ln source_file link_name
+Example: ln original.txt hardlink.txt
+
+# if you create a hard link (hardlink.txt) and then delete original.txt, the data will still be accessible through hardlink.txt. 
+# The data will only be released and the space on the disk freed when the last hard link to that inode is deleted.
+
+Example:
+----------------------
+# Create a file and a hard link
+echo "Hello, world!" > original.txt
+ln original.txt hardlink.txt
+
+# Confirm both files exist
+ls -l original.txt hardlink.txt
+
+# Delete the original file
+rm original.txt
+
+# Confirm that the hard link still contains the data
+cat hardlink.txt
+
+
+
+----------------------
+### Soft Links ###
+----------------------
+# symbolic links can span different file systems and can link to directories. 
+# if you delete the original file (original.txt in this case), the symbolic link (symlink.txt) will be broken and won't point to anything
+  
+ln -s target link_name
+ln -s original.txt symlink.txt
+
+
+
+
+
