@@ -1,0 +1,126 @@
+# coppy file single source
+cp file1 file2
+
+# coppy file multiple source
+cp file1 file2 file3 dir
+
+# move file single source
+mv file1 file2
+
+# move file multiple source
+mv file1 file2 file3 dir
+
+# remove file single source
+rm file1
+
+# remove file multiple source
+rm -fr file1 file2 file3
+
+# create directory single source
+mkdir dir
+
+# create directory multiple source
+mkdir -p par1/par2/par
+
+# copy directory single source
+cp -r dir1 dir2
+
+# copy directory multiple source
+cp -r dir1 dir2 dir3 dir4/
+
+# move directory single source
+mv dir1 dir2
+
+# move directory multiple source
+mv dir1 dir2 dir3 dir4/
+
+# user information
+id
+
+# find the user
+whoami
+
+# remove directory single source
+rm -fr dir1 
+
+# remove directory multiple source
+rm -fr dir1 dir2 dir3
+
+ps au
+
+cat /etc/group
+cat /etc/passwd
+
+useraddd --help
+man useradd
+
+usermod --help
+
+
+-------------------
+useradd & usermod
+-------------------
+-c  --comment  # comment adds value to the GECOS field
+-g  -- gid  # primary group
+-aG --append --groups  # applend to secondary group, usermod!!
+-d  --home  # home directory
+-m  --move-home  # create user home directory, usermod!!
+-m  --create-home  # create user home directory, useradd!!
+-s  --shell  # specifies user login shell /bin/bash  or /usr/sbin/nologin
+-L  --lock  # locks user account, usermod!! 
+-U  --unlock  # unlocks user account, usermod!!
+
+
+-------------------
+uid ranges
+-------------------
+UID 0  #allways assigned to root
+UID 1-200  ## system users, assigned to system processes by Linux Distribution Owners
+UID 102-999 # system users, assigned to system processes, that do not own files on file system
+UID 1000 # assigned to regular users
+
+
+-------------------
+delete users
+-------------------
+userdel <userName>  # removes user from /etc/psswd, but leaves home directory
+userdel -r <userName>  # removes user and user home directory
+
+echo $HOME
+echo $PATH
+sudo su -
+
+tail -5 /etc/shadow
+
+sudo usermod -L <userName>  # lock user
+sudo usermod -U <userName>  # unlock user
+sudo useradd <username> --create-home
+tail -5 /etc/passwd
+sudo usermod -s /usr/sbin/nologin <userName>
+sudo -u <userName> date
+
+
+-------------------
+ownership
+-------------------
+chown -R <username> <directory> # change user ownership of directory and it's contents
+chown :admin <directory>  # change group ownership on directory
+
+
+-------------------
+umask
+-------------------
+umask # current value of shells umask
+umask 077  # clears all group and other permissions
+
+# umask values for Bash shell users are defined:
+/etc/profile
+/etc/bashrc 
+
+
+-------------------
+Kill processes
+-------------------
+kill <PID>
+kill -signal <PID>
+kill -1 
